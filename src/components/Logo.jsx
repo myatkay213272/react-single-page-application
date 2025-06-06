@@ -9,7 +9,7 @@ const Logo = () => {
       </Link>
 
       <Link to='/' className="text-decoration-none">
-         <h2 className="mb-0 fs-4 text-black">WorldWise</h2>
+         <h2 className="mb-0 fs-4 text-success">WorldWise</h2>
       </Link>
      
     </div>

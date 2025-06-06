@@ -1,8 +1,11 @@
+import Sidebar from '../components/Sidebar'
+import Map from '../components/Map'
 
 const AppLayout = () => {
   return (
-    <div>
-        <p>App</p>
+    <div className="d-flex">
+      <Sidebar />
+      <Map />
     </div>
   )
 }
