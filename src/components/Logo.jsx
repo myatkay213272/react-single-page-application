@@ -8,7 +8,7 @@ const Logo = () => {
         <img src={logo} alt="logo" width="40" height="40" />
       </Link>
 
-      <Link to='/'>
+      <Link to='/' className="text-decoration-none">
          <h2 className="mb-0 fs-4 text-black">WorldWise</h2>
       </Link>
      
