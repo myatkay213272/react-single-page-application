@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Pages/Login';
 import CityList from './components/CityList';
 import { useEffect, useState } from 'react';
+import CountriesList from './components/CountryList';
 
 const BASE_URL = 'http://localhost:8000'
 
@@ -50,6 +51,12 @@ const App = () => {
                         cities={cities}
                         isLoading={isLoading}
                       />}/>
+          <Route 
+            path='countries' 
+            element={<CountriesList
+                        cities={cities}
+                        isLoading={isLoading}
+                    />}/>
           <Route path='countries' element={<p>Countries</p>}/>
           <Route path='form' element={<p>Form</p>}/>
         </Route>
