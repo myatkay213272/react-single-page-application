@@ -6,7 +6,7 @@ import PageNotFound from './Pages/PageNotFound';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Pages/Login';
 import CityList from './components/CityList';
-import City from './City';
+import City from './components/City';
 import { useEffect, useState } from 'react';
 import CountriesList from './components/CountryList';
 
@@ -59,7 +59,7 @@ const App = () => {
                         cities={cities}
                         isLoading={isLoading}
                     />}/>
-          <Route path='countries' element={<p>Countries</p>}/>
+          {/* <Route path='countries' element={<p>Countries</p>}/> */}
           <Route path='form' element={<p>Form</p>}/>
         </Route>
         <Route path='*' element={<PageNotFound />} />

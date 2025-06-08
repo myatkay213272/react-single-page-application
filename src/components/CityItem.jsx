@@ -10,11 +10,12 @@ const formatDate = (date) => {
 };
 
 const CityItem = ({ city }) => {
-  const { cityName, emoji, date,id } = city;
+  const { cityName, emoji, date,id ,position} = city;
 
   return (
     <li>
-     <Link to={`${id}`}
+     <Link 
+        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
         className="list-group-item d-flex align-items-center justify-content-between">
        <div className="d-flex align-items-center gap-3">
         <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
@@ -36,7 +37,11 @@ CityItem.propTypes = {
     cityName: PropTypes.string.isRequired,
     emoji: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    id : PropTypes.number.isRequired
+    id : PropTypes.number.isRequired,
+    position : PropTypes.shape({
+      lat : PropTypes.number.isRequired,
+      lng : PropTypes.number.isRequired
+    }).isRequired,
   }).isRequired,
 };
 
