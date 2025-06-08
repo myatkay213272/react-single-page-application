@@ -6,6 +6,7 @@ import PageNotFound from './Pages/PageNotFound';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Pages/Login';
 import CityList from './components/CityList';
+import City from './City';
 import { useEffect, useState } from 'react';
 import CountriesList from './components/CountryList';
 
@@ -39,7 +40,7 @@ const App = () => {
         <Route index element={<Homepage />} />
         <Route path='product' element={<Product />} />
         <Route path='pricing' element={<Pricing />} />
-        <Route path='/login' element={<Login/>}/>
+        <Route path='login' element={<Login/>}/>
         <Route path='app' element={<AppLayout/>}>
           <Route index 
             element={<CityList 
@@ -51,6 +52,7 @@ const App = () => {
                         cities={cities}
                         isLoading={isLoading}
                       />}/>
+          <Route path='cities/:id' element={<City/>}/>
           <Route 
             path='countries' 
             element={<CountriesList

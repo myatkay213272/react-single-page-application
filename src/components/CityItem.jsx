@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat("en", {
@@ -9,11 +10,13 @@ const formatDate = (date) => {
 };
 
 const CityItem = ({ city }) => {
-  const { cityName, emoji, date } = city;
+  const { cityName, emoji, date,id } = city;
 
   return (
-    <li className="list-group-item d-flex align-items-center justify-content-between">
-      <div className="d-flex align-items-center gap-3">
+    <li>
+     <Link to={`${id}`}
+        className="list-group-item d-flex align-items-center justify-content-between">
+       <div className="d-flex align-items-center gap-3">
         <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
         <div>
           <div>{cityName}</div>
@@ -23,6 +26,7 @@ const CityItem = ({ city }) => {
       <button type="button" className="btn btn-sm btn-outline-danger">
         &times;
       </button>
+     </Link>
     </li>
   );
 };
@@ -32,6 +36,7 @@ CityItem.propTypes = {
     cityName: PropTypes.string.isRequired,
     emoji: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
+    id : PropTypes.number.isRequired
   }).isRequired,
 };
 
