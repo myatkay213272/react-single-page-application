@@ -2,8 +2,13 @@ import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import CountryItem from './CountryItem';
 import Message from './Message';
+import { useContext } from 'react';
+import { CitiesContext } from "../contexts/CitiesContext"; 
 
-const CountryList = ({ cities, isLoading }) => {
+
+const CountryList = () => {
+  const {cities,isLoading} = useContext(CitiesContext)
+
   if (isLoading) return <Spinner />;
 
   if (!cities.length)

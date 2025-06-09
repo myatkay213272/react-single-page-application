@@ -1,8 +1,12 @@
 import  Button  from './Button'
 import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import { CitiesContext } from "../contexts/CitiesContext"; 
 
-const Form = ({ notes, setNotes }) => {
+const Form = () => {
+  const {notes,setNotes} = useContext(CitiesContext)
+
   const navigate = useNavigate()
 
   const handleChange = (e) => {
