@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Pages/Login';
 import CityList from './components/CityList';
 import City from './components/City';
+import Form from './components/Form';
 import { useEffect, useState } from 'react';
 import CountriesList from './components/CountryList';
 
@@ -16,6 +17,7 @@ const App = () => {
 
   const [cities,setCities] = useState([])
   const [isLoading,setIsLoading] = useState(false)
+  const [notes,setNotes] = useState('')
 
   useEffect(()=>{
     const fetchCities =async ()=>{
@@ -60,7 +62,10 @@ const App = () => {
                         isLoading={isLoading}
                     />}/>
           {/* <Route path='countries' element={<p>Countries</p>}/> */}
-          <Route path='form' element={<p>Form</p>}/>
+          <Route path='form' element={<Form
+                                        notes={notes}
+                                        setNotes={setNotes}
+                                      />}/>
         </Route>
         <Route path='*' element={<PageNotFound />} />
       </Routes>

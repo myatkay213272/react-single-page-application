@@ -1,6 +1,7 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Map = () => {
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams(); // Get and set query parameters
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -10,6 +11,7 @@ const Map = () => {
     <div
       className="bg-secondary text-white d-flex flex-column justify-content-center align-items-center"
       style={{ width: "800px", minHeight: "100vh" }}
+      onClick={()=>{navigate('form')}}
     >
       <h1>Map</h1>
 
