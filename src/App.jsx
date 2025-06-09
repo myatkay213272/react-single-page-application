@@ -44,6 +44,7 @@ const App = () => {
         <Route path='pricing' element={<Pricing />} />
         <Route path='login' element={<Login/>}/>
         <Route path='app' element={<AppLayout/>}>
+          {/* <Route index element={<Navigate replace to="cities"/>}/> */}
           <Route index 
             element={<CityList 
                       cities={cities} 
