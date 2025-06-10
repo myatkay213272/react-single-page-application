@@ -1,12 +1,11 @@
 import  Button  from './Button'
-import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types'
 import { useCities } from '../contexts/CitiesContext'
+import BackButton from './BackButton'
 
 const Form = () => {
   const {notes,setNotes} = useCities()
 
-  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -47,7 +46,7 @@ const Form = () => {
       ></textarea>
 
       <Button type="submit" variant="primary" className="me-2">Add</Button>
-      <Button type="button" variant="secondary" onClick={() => navigate('/')}>← Back</Button>
+      <BackButton/>
     </form>
   )
 }

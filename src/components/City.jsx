@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useCities } from "../contexts/CitiesContext";
 import { formatDate } from "../utils/formateDate";
+import BackButton from "./BackButton";
 // import Spinner from "./Spinner";
 
 const City = () => {
@@ -60,6 +61,10 @@ const City = () => {
           >
             Learn more on Wikipedia &rarr;
           </a>
+        </div>
+
+        <div>
+          <BackButton/>
         </div>
       </div>
     </div>
