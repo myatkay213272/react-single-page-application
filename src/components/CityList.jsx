@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import Spinner from "./Spinner";
 import CityItem from "./CityItem";
 import Message from './Message';
-import { useContext } from 'react';
-import { CitiesContext } from "../contexts/CitiesContext"; 
+import { useCities } from '../contexts/CitiesContext';
+
 
 const CityList = () => {
 
-  const {cities,isLoading} = useContext(CitiesContext)
+const {cities,isLoading} = useCities()
+
 
   if (isLoading) return <Spinner />;
 
