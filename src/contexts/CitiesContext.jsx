@@ -19,6 +19,7 @@ const CitiesProvider = ({ children }) => {
         setCities(data);
         console.log(data);
       } catch (err) {
+        console.error("Fetch city failed:", err);
         alert("There was an error loading data....");
       } finally {
         setIsLoading(false);
@@ -34,12 +35,13 @@ const CitiesProvider = ({ children }) => {
       if (!res.ok) throw new Error("City not found");
       const data = await res.json();
       setCurrentCity(data);
-    } catch {
-      alert("There was an error loading data...");
+      console.log("Cities from context:", data);
+    } catch(err) {
+      alert("There was an error loading data: " + err.message);
     } finally {
       setIsLoading(false);
     }
-  }) 
+  },[]) 
 
   return (
     <CitiesContext.Provider

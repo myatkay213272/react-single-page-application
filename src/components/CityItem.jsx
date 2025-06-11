@@ -11,27 +11,41 @@ const formatDate = (date) => {
 };
 
 const CityItem = ({ city }) => {
-  const { currentCity } = useCities();
+  const { currentCity, setCurrentCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
 
+  const isActive = id === (currentCity?.id ?? null);
+
   return (
-    <li>
+    <li className="mb-3 list-unstyled">
       <Link
         to={`/app/cities/${id}?lat=${position.lat}&lng=${position.lng}`}
-        className={`list-group-item d-flex align-items-center justify-content-between ${
-          id === (currentCity?.id ?? null) ? "active" : ""
-        }`}
+        onClick={() => setCurrentCity(city)}
+        className="text-decoration-none"
       >
-        <div className="d-flex align-items-center gap-3">
-          <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
-          <div>
-            <div>{cityName}</div>
-            <time className="badge bg-secondary">{formatDate(date)}</time>
+        <div className={`card ${isActive ? "border-primary bg-primary text-white" : "shadow-sm"}`}>
+          <div className="card-body d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center gap-3">
+              <span style={{ fontSize: '1.5rem' }}>{emoji}</span>
+              <div>
+                <h5 className="card-title mb-1">{cityName}</h5>
+                <p className="card-subtitle">
+                  <time className="badge bg-secondary">{formatDate(date)}</time>
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-danger"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent navigating on delete
+                // Optional: add delete logic here
+              }}
+            >
+              &times;
+            </button>
           </div>
         </div>
-        <button type="button" className="btn btn-sm btn-outline-danger">
-          &times;
-        </button>
       </Link>
     </li>
   );
@@ -51,3 +65,4 @@ CityItem.propTypes = {
 };
 
 export default CityItem;
+

@@ -7,23 +7,13 @@ import BackButton from "./BackButton";
 
 const City = () => {
   const { id } = useParams(); // Get city ID from the URL path
-  console.log(id);
+  // console.log(id);
 
   const { getCity, currentCity} = useCities();
-
 
   useEffect(() => {
   getCity(id);
 }, [id, getCity]); 
-
-// useEffect(() => {
-//   console.log("Effect triggered", { id, currentCityId: currentCity?.id });
-//   if (!currentCity?.id || currentCity.id !== id) {
-//     getCity(id);
-//   }
-// }, [id, getCity, currentCity]);
-
-
 
   const { cityName, emoji, date, notes } = currentCity;
 

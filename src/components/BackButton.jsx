@@ -7,7 +7,7 @@ const BackButton = () => {
   return (
     <Button
       type="button"
-      onClick={() => navigate("/")}
+      onClick={() => navigate("/app/cities")}
       className="btn btn-secondary"
     >
       ← Back
