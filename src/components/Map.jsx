@@ -1,36 +1,45 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState } from "react";
+import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-
-const defaultIcon = L.icon({
-  iconUrl: markerIconPng,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
+import { useCities } from "../contexts/CitiesContext";
+import { useSearchParams } from "react-router-dom"
 
 const Map = () => {
-  const [mapPosition] = useState([40, 0]);
+  const { cities } = useCities();
+
+  const [searchParams] = useSearchParams()
+  const lat = searchParams.get("lat")
+  const lng = searchParams.get("lng")
+
+  const mapPosition = lat && lng ? [parseFloat(lat), parseFloat(lng)] : [40, 0];
 
   return (
-    <div
-      className="bg-secondary text-white d-flex flex-column justify-content-center align-items-center"
-      style={{ width: "800px", height: "99vh" }}
-    >
+    <div style={{ width: "800px", height: "99vh" }}>
       <MapContainer center={mapPosition} zoom={13} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={mapPosition} icon={defaultIcon}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {cities.map(city =>
+          city.position?.lat && city.position?.lng ? (
+            <Marker position={[city.position.lat, city.position.lng]} key={city.id}>
+              <Popup>
+                <span>{city.emoji} {city.cityName}</span>
+              </Popup>
+            </Marker>
+          ) : null
+        )}
       </MapContainer>
     </div>
   );
 };
+
+
+Map.propTypes = {
+   position: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  }).isRequired,
+}
 
 export default Map;
