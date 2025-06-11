@@ -1,12 +1,18 @@
-import { useNavigate } from "react-router-dom"
-
-const navigate = useNavigate()
+import { useNavigate } from "react-router-dom";
+import Button from "./Button"; // Ensure the path is correct
 
 const BackButton = () => {
+  const navigate = useNavigate();
+
   return (
-    <Button type="button" variant="secondary" onClick={() => navigate('/')}>← Back</Button>
+    <Button
+      type="button"
+      onClick={() => navigate("/")}
+      className="btn btn-secondary"
+    >
+      ← Back
+    </Button>
+  );
+};
 
-  )
-}
-
-export default BackButton
+export default BackButton;
