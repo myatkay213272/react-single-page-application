@@ -2,24 +2,21 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "re
 import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css';
 import { useCities } from "../contexts/CitiesContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import Button from "./Button"; // you can also replace this with a Bootstrap button
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 const Map = () => {
   const { cities } = useCities();
-
-  const [searchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState([40, 0]);
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
-
-  const mapLat = parseFloat(searchParams.get("lat"));
-  const mapLng = parseFloat(searchParams.get("lng"));
+ const [mapLat,mapLng] = useUrlPosition()
 
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
