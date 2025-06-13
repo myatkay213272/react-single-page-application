@@ -4,6 +4,7 @@ import { useUrlPosition } from '../hooks/useUrlPosition'
 import Button from './Button'
 import BackButton from './BackButton'
 import Spinner from './Spinner'
+import Message from './Message'
 
 const Form = () => {
   const [lat, lng] = useUrlPosition()
@@ -11,23 +12,24 @@ const Form = () => {
   const [cityName, setCityName] = useState('')
   const [country, setCountry] = useState('')
   const [date, setDate] = useState('')
-  const [emoji, setEmoji] = useState('')
   const [noteText, setNoteText] = useState('')
   const [geocodingError,setGeocodingError] = useState('')
 
   
-  const BASE_URL = 'https://localhost:8000'
+  const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=en';
   
   useEffect(() => {
     const fetchCityData = async () => {
+
+      if(!lat && !lng) return 
+
       try {
         setIsLoadingGeocoding(true)
         const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
         const data = await res.json()
         console.log(data)
-        setCityName(data.cityName  ||'')
+        setCityName(data.city||'')
         setCountry(data.country || '')
-        setEmoji(data.emoji)
       } catch (err) {
         setGeocodingError(err.message)
         console.error('Failed to fetch city data:', err)
@@ -39,20 +41,29 @@ const Form = () => {
     if (lat && lng) fetchCityData()
   }, [lat, lng])
 
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if (!cityName) return 
+
+    const newCity = {
+      cityName ,
+      country ,
+      date ,
+      noteText ,
+      position : {lat,lng}
+    }
+    console.log(newCity)
+  }
 
   if(isLoadingGeocoding) return <Spinner/>
 
-  if (geocodingError) {
-  return (
-    <p className="alert alert-danger">
-      Failed to fetch city data: {geocodingError}
-    </p>
-  );
-}
+  if(!lat && !lng) return <Message message='Start by clicking somewhere on the map'/>
+
+  if (geocodingError) return <Message message={geocodingError}/>
 
 
   return (
-    <form className="p-4 border rounded bg-light text-black">
+    <form onSubmit={handleSubmit} className="p-4 border rounded bg-light text-black">
       <div className="mb-3">
         <label className="form-label">City name</label>
         <input
@@ -61,7 +72,6 @@ const Form = () => {
           value={cityName}
           onChange={(e) => setCityName(e.target.value)}
         />
-        <span>{emoji}</span>
       </div>
 
       <div className="mb-3">
@@ -74,15 +84,6 @@ const Form = () => {
         />
       </div>
 
-      <div className="mb-3">
-        <label className="form-label">Emoji (you can enter text or emoji)</label>
-        <input
-          type="text"
-          className="form-control"
-          value={emoji}
-          onChange={(e) => setEmoji(e.target.value)}
-        />
-      </div>
 
       <div className="mb-3">
         <label className="form-label">When did you go to {cityName || 'this city'}?</label>
@@ -92,6 +93,11 @@ const Form = () => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
+        {/* <DatePicker 
+          onChange={date =>setDate(date)} 
+          selected={date}
+          dateFormat='dd/MM/yyy'
+        /> */}
       </div>
 
       <div className="mb-3">

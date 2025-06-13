@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext, useCallback } from "react";
 import PropTypes from "prop-types";
-import { BASE_URL } from "./citiesUtils";  // import BASE_URL from utils
+import { BASE_URL } from "./citiesUtils";  
 
 export const CitiesContext = createContext();
 

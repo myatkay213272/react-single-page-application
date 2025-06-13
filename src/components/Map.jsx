@@ -5,7 +5,7 @@ import { useCities } from "../contexts/CitiesContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
-import Button from "./Button"; // you can also replace this with a Bootstrap button
+import Button from "./Button"; 
 import { useUrlPosition } from "../hooks/useUrlPosition";
 
 const Map = () => {
@@ -95,8 +95,8 @@ const DetectClick = () => {
     click: (e) => {
       console.log(e);
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
-    },
-  });
+    }
+  })
 };
 
 export default Map;
